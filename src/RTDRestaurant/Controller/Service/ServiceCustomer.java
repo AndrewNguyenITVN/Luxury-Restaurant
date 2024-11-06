@@ -28,7 +28,7 @@ public class ServiceCustomer {
     //Lấy toàn bộ danh sách Món ăn theo loại Món Ăn đang kinh doanh
     public ArrayList<ModelMonAn> MenuFood(String type) throws SQLException {
         ArrayList<ModelMonAn> list = new ArrayList<>();
-        String sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh'";
+        String sql = "SELECT ID_MonAn, TenMon, DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh'";
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, type);
         ResultSet r = p.executeQuery();
@@ -53,18 +53,24 @@ public class ServiceCustomer {
     public ArrayList<ModelMonAn> MenuFoodOrder(String type, String orderBy) throws SQLException {
         ArrayList<ModelMonAn> list = new ArrayList<>();
 
-        String sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh'";
+        String sql = "SELECT ID_MonAn, TenMon, DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh'";
+
         switch (orderBy) {
-            case "Tên A->Z" -> {
-                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY TenMon";
-            }
-            case "Giá tăng dần" -> {
-                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY DonGia";
-            }
-            case "Giá giảm dần" -> {
-                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY DonGia DESC";
-            }
+            case "Tên A->Z":
+                sql = "SELECT ID_MonAn, TenMon, DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY TenMon";
+                break;
+            case "Giá tăng dần":
+                sql = "SELECT ID_MonAn, TenMon, DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY DonGia";
+                break;
+            case "Giá giảm dần":
+                sql = "SELECT ID_MonAn, TenMon, DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY DonGia DESC";
+                break;
+            default:
+                // Nếu không có case nào phù hợp, sử dụng mặc định
+                sql = "SELECT ID_MonAn, TenMon, DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh'";
+                break;
         }
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, type);
 
@@ -137,7 +143,7 @@ public class ServiceCustomer {
     //Lấy thông tin khách hàng từ ID người dùng
     public ModelKhachHang getCustomer(int userID) throws SQLException {
         ModelKhachHang data = null;
-        String sql = "SELECT ID_KH, TenKH, to_char(Ngaythamgia, 'dd-mm-yyyy') AS NgayTG, Doanhso,Diemtichluy FROM KhachHang WHERE ID_ND=?";
+        String sql = "SELECT ID_KH, TenKH, DATE_FORMAT(Ngaythamgia, '%d-%m-%Y') AS NgayTG, Doanhso, Diemtichluy FROM KhachHang WHERE ID_ND=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, userID);
         ResultSet r = p.executeQuery();

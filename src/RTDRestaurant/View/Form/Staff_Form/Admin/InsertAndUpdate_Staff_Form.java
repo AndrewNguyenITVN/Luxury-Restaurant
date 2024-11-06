@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
@@ -50,7 +49,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         if (data == null) {
             insert = true;
             lbTitle.setText("Thêm NHÂN VIÊN"); 
-            data = new ModelNhanVien();
+            data = new ModelNhanVien(id_NV, tenNV, ngayVL, sdt, chucvu, tinhtrang);
             initID();
             txtNVL.setDate(new Date());
             cmdKick.setVisible(false);

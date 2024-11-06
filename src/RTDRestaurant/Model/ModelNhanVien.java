@@ -44,13 +44,6 @@ public class ModelNhanVien {
         this.chucvu = chucvu;
     }
 
-    public int getId_NQL() {
-        return id_NQL;
-    }
-
-    public void setId_NQL(int id_NQL) {
-        this.id_NQL = id_NQL;
-    }
 
     public String getTinhTrang() {
         return tinhTrang;
@@ -60,26 +53,24 @@ public class ModelNhanVien {
         this.tinhTrang = tinhTrang;
     }
 
-    
     public ModelNhanVien() {
+
     }
 
-    public ModelNhanVien(int id_NV, String tenNV, String ngayVL, String sdt, String chucvu, int id_NQL) {
+    public ModelNhanVien(int id_NV, String tenNV, String ngayVL, String sdt, String chucvu) {
         this.id_NV = id_NV;
         this.tenNV = tenNV;
         this.ngayVL = ngayVL;
         this.sdt = sdt;
         this.chucvu = chucvu;
-        this.id_NQL = id_NQL;
     }
 
-    public ModelNhanVien(int id_NV, String tenNV, String ngayVL, String sdt, String chucvu, int id_NQL, String tinhTrang) {
+    public ModelNhanVien(int id_NV, String tenNV, String ngayVL, String sdt, String chucvu, String tinhTrang) {
         this.id_NV = id_NV;
         this.tenNV = tenNV;
         this.ngayVL = ngayVL;
         this.sdt = sdt;
         this.chucvu = chucvu;
-        this.id_NQL = id_NQL;
         this.tinhTrang = tinhTrang;
     }
     
@@ -89,7 +80,6 @@ public class ModelNhanVien {
     private String ngayVL;
     private String sdt;
     private String chucvu;
-    private int id_NQL;
     private String tinhTrang;
     
 }
