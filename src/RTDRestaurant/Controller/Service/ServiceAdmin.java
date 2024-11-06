@@ -340,4 +340,31 @@ public class ServiceAdmin {
         p.execute();
         p.close();
     }
+    //Ngưng kinh doanh một món ăn (Cập nhật TrangThai='Ngung kinh doanh')
+    public void StopSell(int idMA) throws SQLException {
+        String sql = "UPDATE MonAn SET TrangThai = 'Ngung kinh doanh' WHERE ID_MonAn=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, idMA);
+        p.execute();
+        p.close();
+    }
+    //Kinh doanh trở lại một món ăn (Cập nhật TrangThai='Dang kinh doanh')
+    public void BackSell(int idMA) throws SQLException {
+        String sql = "UPDATE MonAn SET TrangThai = 'Dang kinh doanh' WHERE ID_MonAn=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, idMA);
+        p.execute();
+        p.close();
+    }
+    public int getNextID_MA() throws SQLException {
+        int id = 0;
+        String sql = "SELECT IFNULL(MIN(ID_MonAn) + 1, 1) FROM MonAn WHERE ID_MonAn + 1 NOT IN (SELECT ID_MonAn FROM MonAn)";
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            id = r.getInt(1);
+        }
+        return id;
+    }
+
 }

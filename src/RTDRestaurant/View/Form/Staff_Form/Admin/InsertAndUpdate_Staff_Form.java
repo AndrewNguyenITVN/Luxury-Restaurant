@@ -1,8 +1,7 @@
 package RTDRestaurant.View.Form.Staff_Form.Admin;
 
 import RTDRestaurant.Controller.Service.ServiceAdmin;
-import RTDRestaurant.Model.ModelNguoiDung;
-import RTDRestaurant.Model.ModelNhanVien;
+import RTDRestaurant.Model.*;
 import RTDRestaurant.View.Dialog.MS_Admin_Confirm;
 import RTDRestaurant.View.Dialog.MS_Warning;
 import RTDRestaurant.View.Form.MainForm;
@@ -49,7 +48,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         if (data == null) {
             insert = true;
             lbTitle.setText("Thêm NHÂN VIÊN"); 
-            data = new ModelNhanVien(id_NV, tenNV, ngayVL, sdt, chucvu, tinhtrang);
+            data = new ModelNhanVien();
             initID();
             txtNVL.setDate(new Date());
             cmdKick.setVisible(false);
@@ -81,9 +80,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
     public void initID() {
         try {
             data.setId_NV(service.getNextID_NV());
-            data.setId_NQL(admin.getId_NV());
             txtmaNV.setText(data.getId_NV() + "");
-            txtmaNQL.setText(data.getId_NQL() + "");
         } catch (SQLException ex) {
 
         }
@@ -100,7 +97,6 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         txtNVL.setEnabled(false);
         txttSDT.setText(data.getSdt());
         cbboxCvu.setSelectedItem(data.getChucvu());
-        txtmaNQL.setText(data.getId_NQL() + "");
     }
 
     @SuppressWarnings("unchecked")

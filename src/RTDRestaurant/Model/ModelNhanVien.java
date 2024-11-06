@@ -46,11 +46,11 @@ public class ModelNhanVien {
 
 
     public String getTinhTrang() {
-        return tinhTrang;
+        return tinhtrang;
     }
 
     public void setTinhTrang(String tinhTrang) {
-        this.tinhTrang = tinhTrang;
+        this.tinhtrang = tinhTrang;
     }
 
     public ModelNhanVien() {
@@ -71,7 +71,7 @@ public class ModelNhanVien {
         this.ngayVL = ngayVL;
         this.sdt = sdt;
         this.chucvu = chucvu;
-        this.tinhTrang = tinhTrang;
+        this.tinhtrang = tinhTrang;
     }
     
     
@@ -80,6 +80,6 @@ public class ModelNhanVien {
     private String ngayVL;
     private String sdt;
     private String chucvu;
-    private String tinhTrang;
+    private String tinhtrang;
     
 }

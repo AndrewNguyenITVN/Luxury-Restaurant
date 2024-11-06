@@ -58,7 +58,6 @@ private MS_ChangePassword changepass;
             txtngVL.setText(staff.getNgayVL());
             txtSDT.setText(staff.getSdt());
             txtCvu.setText(staff.getChucvu());
-            txtMaNQL.setText(staff.getId_NQL()+"");
         } catch (SQLException ex) {
             Logger.getLogger(AccountS_Form.class.getName()).log(Level.SEVERE, null, ex);
         }

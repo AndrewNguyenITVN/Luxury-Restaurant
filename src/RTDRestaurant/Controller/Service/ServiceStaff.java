@@ -31,7 +31,7 @@ public class ServiceStaff {
     //Lấy thông tin nhân viên từ ID người dùng
     public ModelNhanVien getStaff(int userID) throws SQLException {
         ModelNhanVien data = null;
-        String sql = "SELECT ID_NV, TenNV, to_char(NgayVL, 'dd-mm-yyyy') AS Ngay, SDT, Chucvu, ID_NQL FROM NhanVien WHERE ID_ND=?";
+        String sql = "SELECT ID_NV, TenNV, to_char(NgayVL, 'dd-mm-yyyy') AS Ngay, SDT, Chucvu FROM NhanVien WHERE ID_ND=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, userID);
         ResultSet r = p.executeQuery();
@@ -41,8 +41,7 @@ public class ServiceStaff {
             String ngayVL = r.getString("Ngay");
             String sdt = r.getString("SDT");
             String chucvu = r.getString("Chucvu");
-            int id_NQL = r.getInt("ID_NQL");
-            data = new ModelNhanVien(id_NV, tenNV, ngayVL, sdt, chucvu, id_NQL);
+            data = new ModelNhanVien(id_NV, tenNV, ngayVL, sdt, chucvu);
         }
         r.close();
         p.close();
