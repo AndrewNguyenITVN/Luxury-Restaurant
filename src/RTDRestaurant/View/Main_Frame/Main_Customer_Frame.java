@@ -162,13 +162,8 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main_Customer_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
-        try {
-            DatabaseConnection.getInstance().connectToDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DatabaseConnection.getInstance().connectToDatabase();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_Customer_Frame().setVisible(true);
@@ -198,13 +193,8 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main_Customer_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
-        try {
-            DatabaseConnection.getInstance().connectToDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DatabaseConnection.getInstance().connectToDatabase();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_Customer_Frame(user).setVisible(true);

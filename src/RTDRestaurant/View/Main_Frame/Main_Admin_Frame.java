@@ -156,13 +156,8 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
-        try {
-            DatabaseConnection.getInstance().connectToDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DatabaseConnection.getInstance().connectToDatabase();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_Admin_Frame().setVisible(true);
@@ -200,13 +195,8 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
-        try {
-            DatabaseConnection.getInstance().connectToDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DatabaseConnection.getInstance().connectToDatabase();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_Admin_Frame(user).setVisible(true);
