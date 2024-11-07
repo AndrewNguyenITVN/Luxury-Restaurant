@@ -235,7 +235,8 @@ public class ServiceCustomer {
     public void InsertHoaDon(ModelBan table, ModelKhachHang customer) throws SQLException {
         //Tìm ID_HD tiếp theo
         int idHD=0;
-        PreparedStatement p_ID=con.prepareStatement("SELECT MAX(ID_HoaDon) +1 FROM HoaDon");
+        PreparedStatement p_ID = con.prepareStatement("SELECT COALESCE(MAX(ID_HoaDon), 0) + 1 FROM HoaDon");
+
         ResultSet r_id=p_ID.executeQuery();
         if(r_id.next()){
             idHD=r_id.getInt(1);
@@ -243,8 +244,9 @@ public class ServiceCustomer {
        
         //Thêm Hoá Đơn mới
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String sql = "INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai)"
-                + " VALUES (?,?,?,to_date(?, 'dd-mm-yyyy'),0,0,'Chua thanh toan')";
+        String sql = "INSERT INTO HoaDon (ID_HoaDon, ID_KH, ID_Ban, NgayHD, TienMonAn, TienGiam, Trangthai) "
+                + "VALUES (?, ?, ?, STR_TO_DATE(?, '%d-%m-%Y'), 0, 0, 'Chua thanh toan')";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, idHD);
         p.setInt(2, customer.getID_KH());
@@ -260,8 +262,9 @@ public class ServiceCustomer {
     //Lấy thông tin HoaDon mà Khách hàng vừa đặt, Hóa Đơn có trạng thái 'Chưa thanh toán'
     public ModelHoaDon FindHoaDon(ModelKhachHang customer) throws SQLException {
         ModelHoaDon hoadon = null;
-        String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                + "WHERE ID_KH=? AND Trangthai='Chua thanh toan'";
+        String sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai "
+                + "FROM HoaDon WHERE ID_KH = ? AND Trangthai = 'Chua thanh toan'";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, customer.getID_KH());
         ResultSet r = p.executeQuery();
@@ -316,8 +319,10 @@ public class ServiceCustomer {
     // Lấy danh sách CTHD từ ID_HoaDon
     public ArrayList<ModelCTHD> getCTHD(int ID_HoaDon) throws SQLException {
         ArrayList<ModelCTHD> list = new ArrayList<>();
-        String sql = "SELECT ID_HoaDon,CTHD.ID_MonAn, TenMon,SoLuong,Thanhtien FROM CTHD "
-                + "JOIN MonAn ON MonAn.ID_MonAn=CTHD.ID_MonAn WHERE ID_HoaDon=?";
+        String sql = "SELECT ID_HoaDon, CTHD.ID_MonAn, TenMon, SoLuong, Thanhtien "
+                + "FROM CTHD JOIN MonAn ON MonAn.ID_MonAn = CTHD.ID_MonAn "
+                + "WHERE ID_HoaDon = ?";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, ID_HoaDon);
         ResultSet r = p.executeQuery();
@@ -338,8 +343,9 @@ public class ServiceCustomer {
     //Lấy toàn bộ danh sách hóa đơn của một khách hàng
     public ArrayList<ModelHoaDon> getListHD(int ID_KH) throws SQLException {
         ArrayList<ModelHoaDon> list = new ArrayList<>();
-        String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                + "WHERE ID_KH=? ORDER BY ID_HoaDon";
+        String sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai "
+                + "FROM HoaDon WHERE ID_KH = ? ORDER BY ID_HoaDon";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, ID_KH);
         ResultSet r = p.executeQuery();
@@ -364,28 +370,30 @@ public class ServiceCustomer {
     //Lấy toàn bộ danh sách hóa đơn của một khách hàng theo mốc Tổng tiền Hóa Đơn
     public ArrayList<ModelHoaDon> getListHDOrder(int ID_KH, String order) throws SQLException {
         ArrayList<ModelHoaDon> list = new ArrayList<>();
-        String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                + "WHERE ID_KH=? ORDER BY ID_HoaDon";
+        String sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai "
+                + "FROM HoaDon WHERE ID_KH = ? ORDER BY ID_HoaDon";
+
         switch (order) {
             case "Tất cả":
-                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                        + "WHERE ID_KH=? ORDER BY ID_HoaDon";
+                sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai "
+                        + "FROM HoaDon WHERE ID_KH = ? ORDER BY ID_HoaDon";
                 break;
             case "Dưới 1.000.000đ":
-                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                        + "WHERE ID_KH=? AND Tongtien <1000000 ORDER BY ID_HoaDon";
+                sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai "
+                        + "FROM HoaDon WHERE ID_KH = ? AND Tongtien < 1000000 ORDER BY ID_HoaDon";
                 break;
             case "Từ 1 đến 5.000.000đ":
-                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                        + "WHERE ID_KH=? AND Tongtien BETWEEN 1000000 AND 5000001 ORDER BY ID_HoaDon";
+                sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai "
+                        + "FROM HoaDon WHERE ID_KH = ? AND Tongtien BETWEEN 1000000 AND 5000000 ORDER BY ID_HoaDon";
                 break;
             case "Trên 5.000.000đ":
-                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                        + "WHERE ID_KH=? AND Tongtien >5000000 ORDER BY ID_HoaDon";
+                sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai "
+                        + "FROM HoaDon WHERE ID_KH = ? AND Tongtien > 5000000 ORDER BY ID_HoaDon";
                 break;
             default:
                 break;
-        }
+
+    }
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, ID_KH);
         ResultSet r = p.executeQuery();
