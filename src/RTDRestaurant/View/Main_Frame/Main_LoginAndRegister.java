@@ -2,7 +2,6 @@
 package RTDRestaurant.View.Main_Frame;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
-import RTDRestaurant.Controller.Service.ServiceMail;
 import RTDRestaurant.Controller.Service.ServiceUser;
 import RTDRestaurant.Model.ModelLogin;
 import RTDRestaurant.Model.ModelMessage;
@@ -160,7 +159,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                 showMessage(Message.MessageType.ERROR,"Email đã tồn tại");
             }else{
                 service.insertUser(user);
-                sendMail(user);
+                showMessage(Message.MessageType.SUCCESS,"Đăng kí thành công");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -198,22 +197,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             showMessage(Message.MessageType.ERROR, "Lỗi đăng nhập");
         }
     }
-    private void sendMail(ModelNguoiDung user){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                loading.setVisible(true);
-                ModelMessage ms = new ServiceMail().sendMain(user.getEmail(), user.getVerifyCode());
-                if (ms.isSuccess()) {
-                    loading.setVisible(false);
-                    verifyCode.setVisible(true);
-                } else {
-                    loading.setVisible(false);
-                    showMessage(Message.MessageType.ERROR, ms.getMessage());
-                }
-            }
-        }).start();
-    }
+
     private void showMessage(Message.MessageType messageType,String message){
         Message ms=new Message();
         ms.showMessage(messageType, message);

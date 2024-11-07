@@ -31,7 +31,8 @@ public class ServiceStaff {
     //Lấy thông tin nhân viên từ ID người dùng
     public ModelNhanVien getStaff(int userID) throws SQLException {
         ModelNhanVien data = null;
-        String sql = "SELECT ID_NV, TenNV, to_char(NgayVL, 'dd-mm-yyyy') AS Ngay, SDT, Chucvu FROM NhanVien WHERE ID_ND=?";
+        String sql = "SELECT ID_NV, TenNV, DATE_FORMAT(NgayVL, '%d-%m-%Y') AS Ngay, SDT, Chucvu FROM NhanVien WHERE ID_ND=?";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, userID);
         ResultSet r = p.executeQuery();
@@ -150,7 +151,8 @@ public class ServiceStaff {
     //Lấy toàn bộ danh sách Phiếu nhập kho
     public ArrayList<ModelPNK> MenuPNK() throws SQLException {
         ArrayList<ModelPNK> list = new ArrayList<>();
-        String sql = "SELECT ID_NK,ID_NV,to_char(NgayNK,'dd-mm-yyyy') AS Ngay,Tongtien FROM PhieuNK ORDER BY ID_NK";
+        String sql = "SELECT ID_NK, ID_NV, DATE_FORMAT(NgayNK, '%d-%m-%Y') AS Ngay, Tongtien FROM PhieuNK ORDER BY ID_NK";
+
         PreparedStatement p = con.prepareStatement(sql);
         ResultSet r = p.executeQuery();
         while (r.next()) {
@@ -169,7 +171,8 @@ public class ServiceStaff {
     //Lấy thông tin của Phiếu nhập kho theo ID
     public ModelPNK getPNKbyID(int id) throws SQLException {
         ModelPNK data = null;
-        String sql = "SELECT ID_NK,ID_NV,to_char(NgayNK,'dd-mm-yyyy') AS Ngay,Tongtien FROM PhieuNK WHERE ID_NK=?";
+        String sql = "SELECT ID_NK, ID_NV, DATE_FORMAT(NgayNK, '%d-%m-%Y') AS Ngay, Tongtien FROM PhieuNK WHERE ID_NK=?";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, id);
         ResultSet r = p.executeQuery();
@@ -189,7 +192,8 @@ public class ServiceStaff {
     public int getTongtienNK() throws SQLException {
         int tongtien = 0;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String sql = "SELECT SUM(Tongtien) FROM PhieuNK WHERE NgayNK=to_date(?, 'dd-mm-yyyy')";
+        String sql = "SELECT SUM(Tongtien) FROM PhieuNK WHERE NgayNK = STR_TO_DATE(?, '%d-%m-%Y')";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, simpleDateFormat.format(new Date()));
         ResultSet r = p.executeQuery();
@@ -204,8 +208,9 @@ public class ServiceStaff {
     //Lấy danh sách chi tiết nhập kho theo mã nhập kho
     public ArrayList<ModelCTNK> getCTNK(int idnk) throws SQLException {
         ArrayList<ModelCTNK> list = new ArrayList<>();
-        String sql = "SELECT ID_NK,CTNK.ID_NL, TenNL,Donvitinh,SoLuong,Thanhtien FROM CTNK "
-                + "JOIN NguyenLieu ON NguyenLieu.ID_NL=CTNK.ID_NL WHERE ID_NK=? ORDER BY ID_NK";
+        String sql = "SELECT ID_NK, CTNK.ID_NL, TenNL, Donvitinh, SoLuong, Thanhtien FROM CTNK "
+                + "JOIN NguyenLieu ON NguyenLieu.ID_NL = CTNK.ID_NL WHERE ID_NK = ? ORDER BY ID_NK";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, idnk);
         ResultSet r = p.executeQuery();
@@ -227,7 +232,8 @@ public class ServiceStaff {
     //Lấy toàn bộ danh sách Phiếu xuất kho
     public ArrayList<ModelPXK> MenuPXK() throws SQLException {
         ArrayList<ModelPXK> list = new ArrayList<>();
-        String sql = "SELECT ID_XK,ID_NV,to_char(NgayXK,'dd-mm-yyyy') AS Ngay FROM PhieuXK ORDER BY ID_XK";
+        String sql = "SELECT ID_XK, ID_NV, DATE_FORMAT(NgayXK, '%d-%m-%Y') AS Ngay FROM PhieuXK ORDER BY ID_XK";
+
         PreparedStatement p = con.prepareStatement(sql);
         ResultSet r = p.executeQuery();
         while (r.next()) {
@@ -245,7 +251,8 @@ public class ServiceStaff {
     //Lấy thông tin của Phiếu xuất kho theo ID
     public ModelPXK getPXKbyID(int id) throws SQLException {
         ModelPXK data = null;
-        String sql = "SELECT ID_XK,ID_NV,to_char(NgayXK,'dd-mm-yyyy') AS Ngay FROM PhieuXK WHERE ID_XK=?";
+        String sql = "SELECT ID_XK, ID_NV, DATE_FORMAT(NgayXK, '%d-%m-%Y') AS Ngay FROM PhieuXK WHERE ID_XK=?";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, id);
         ResultSet r = p.executeQuery();
@@ -263,8 +270,9 @@ public class ServiceStaff {
     //Lấy số lượng phiếu xuất kho trong ngày hiện tại
     public int getSLPXK() throws SQLException {
         int sl = 0;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String sql = "SELECT COUNT(*) FROM PhieuXK WHERE NgayXK=to_date(?, 'dd-mm-yyyy')";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String sql = "SELECT COUNT(*) FROM PhieuXK WHERE NgayXK = STR_TO_DATE(?, '%d-%m-%Y')";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, simpleDateFormat.format(new Date()));
         ResultSet r = p.executeQuery();
@@ -361,7 +369,8 @@ public class ServiceStaff {
     //Thêm phiếu nhập kho và chi tiết Nhập kho
     public void InsertPNK_CTNK(ModelPNK pnk, ArrayList<ModelKho> list) throws SQLException {
         //Thêm phiếu nhập kho
-        String sql = "INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (?,?,to_date(?, 'dd-mm-yyyy'))";
+        String sql = "INSERT INTO PhieuNK (ID_NK, ID_NV, NgayNK) VALUES (?, ?, STR_TO_DATE(?, '%d-%m-%Y'))";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, pnk.getIdNK());
         p.setInt(2, pnk.getIdNV());
@@ -386,7 +395,8 @@ public class ServiceStaff {
     //Thêm phiếu xuất kho và chi tiết Xuất kho
     public void InsertPXK_CTXK(ModelPXK pxk, ArrayList<ModelKho> list) throws SQLException {
         //Thêm phiếu nhập kho
-        String sql = "INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (?,?,to_date(?, 'dd-mm-yyyy'))";
+        String sql = "INSERT INTO PhieuXK (ID_XK, ID_NV, NgayXK) VALUES (?, ?, STR_TO_DATE(?, '%d-%m-%Y'))";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, pxk.getIdXK());
         p.setInt(2, pxk.getIdNV());
@@ -411,7 +421,8 @@ public class ServiceStaff {
     //Lấy toàn bộ danh sách Khách Hàng
     public ArrayList<ModelKhachHang> MenuKH() throws SQLException {
         ArrayList<ModelKhachHang> list = new ArrayList<>();
-        String sql = "SELECT ID_KH, TenKH, to_char(Ngaythamgia,'dd-mm-yyyy') AS Ngay, Doanhso, Diemtichluy FROM KhachHang";
+        String sql = "SELECT ID_KH, TenKH, DATE_FORMAT(Ngaythamgia, '%d-%m-%Y') AS Ngay, Doanhso, Diemtichluy FROM KhachHang";
+
         PreparedStatement p = con.prepareStatement(sql);
         ResultSet r = p.executeQuery();
         while (r.next()) {
@@ -449,8 +460,9 @@ public class ServiceStaff {
     //Tìm hóa đơn có trạng thái Chưa thanh toán  dựa vào trạng mã Bàn
     public ModelHoaDon FindHoaDonbyID_Ban(ModelBan table) throws SQLException {
         ModelHoaDon hoadon = null;
-        String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
+        String sql = "SELECT ID_HoaDon, ID_KH, ID_Ban, DATE_FORMAT(NgayHD, '%d-%m-%Y') AS Ngay, TienMonAn, Code_Voucher, TienGiam, Tongtien, Trangthai FROM HoaDon "
                 + "WHERE ID_Ban=? AND Trangthai='Chua thanh toan'";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, table.getID());
         ResultSet r = p.executeQuery();
