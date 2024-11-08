@@ -334,7 +334,7 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
                 break;
             }
         }
-        main.showForm(new CTNK_Form(bill, main));
+        //main.showForm(new CTNK_Form(bill, main));
     }//GEN-LAST:event_cmdCTNKActionPerformed
 
 

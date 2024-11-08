@@ -1,16 +1,15 @@
 package RTDRestaurant.Controller.Service;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
-import RTDRestaurant.Model.ModelChart;
-import RTDRestaurant.Model.ModelHoaDon;
-import RTDRestaurant.Model.ModelMonAn;
-import RTDRestaurant.Model.ModelNhanVien;
-import RTDRestaurant.Model.ModelPNK;
+import RTDRestaurant.Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 import javax.swing.ImageIcon;
 
 public class ServiceAdmin {
@@ -81,15 +80,42 @@ public class ServiceAdmin {
     public void insertNV(ModelNhanVien data) throws SQLException {
         String sql = "INSERT INTO NhanVien(ID_NV, TenNV, NgayVL, SDT, Chucvu, TinhTrang) VALUES (?, ?, ?, ?, ?, 'Dang lam viec')";
 
+        // Chuyển đổi ngày sang định dạng yyyy-MM-dd
+        String ngayVL = data.getNgayVL();
+        String ngayVLFormatted = convertDateFormat(ngayVL);
+
+        if (ngayVLFormatted == null) {
+            System.out.println("Định dạng ngày không hợp lệ: " + ngayVL);
+            return; // Dừng lại nếu ngày không hợp lệ
+        }
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, data.getId_NV());
         p.setString(2, data.getTenNV());
-        p.setString(3, data.getNgayVL());
+        p.setString(3, ngayVLFormatted);
         p.setString(4, data.getSdt());
         p.setString(5, data.getChucvu());
         p.execute();
         p.close();
     }
+
+    private String convertDateFormat(String dateStr) {
+        try {
+            // Định dạng đầu vào là dd-MM-yyyy
+            SimpleDateFormat fromUser = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = fromUser.parse(dateStr);
+
+            // Định dạng đầu ra là yyyy-MM-dd
+            SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+            return myFormat.format(date);
+
+        } catch (ParseException e) {
+            System.err.println("Lỗi chuyển đổi định dạng ngày: " + e.getMessage());
+            return null; // Trả về null nếu có lỗi
+        }
+    }
+    
+    
 
     //Sa thải một nhân viên, cập nhận tình trạng thành 'Da nghi viec'
     public void FireStaff(int idNV) throws SQLException {
@@ -170,6 +196,7 @@ public class ServiceAdmin {
         r.close();
         return revenue;
     }
+
     //Lấy tổng doanh thu Hóa Đơn của tháng trước
     public int getPreMonthRevenueHD() throws SQLException {
         int Pre_revenue = 0;
@@ -185,7 +212,6 @@ public class ServiceAdmin {
         r.close();
         return Pre_revenue;
     }
-    
 
     //Lấy toàn bộ danh sách Phiếu Nhập Kho trong Tất cả/ngày/tháng/năm
     public ArrayList<ModelPNK> getListPNKIn(String txt) throws SQLException {
@@ -242,6 +268,7 @@ public class ServiceAdmin {
         r.close();
         return revenue;
     }
+
     //Lấy tổng chi phí Nhập Kho của tháng trước
     public int getPreMonthCostNK() throws SQLException {
         int Pre_Cost = 0;
@@ -259,8 +286,8 @@ public class ServiceAdmin {
     }
 
     //Lấy toàn bộ doanh thu, chi phí, lợi nhuận của từng tháng trong năm
-    public ArrayList<ModelChart> getRevenueCostProfit_byMonth() throws SQLException{
-        ArrayList<ModelChart> list=new ArrayList<>();
+    public ArrayList<ModelChart> getRevenueCostProfit_byMonth() throws SQLException {
+        ArrayList<ModelChart> list = new ArrayList<>();
         String sql_Revenue = "SELECT MONTH(NgayHD) as Thang, SUM(TONGTIEN) FROM HoaDon WHERE YEAR(NgayHD) = YEAR(CURDATE()) "
                 + "GROUP BY MONTH(NgayHD) ORDER BY Thang";
 
@@ -269,17 +296,18 @@ public class ServiceAdmin {
 
         PreparedStatement p_R = con.prepareStatement(sql_Revenue);
         PreparedStatement p_C = con.prepareStatement(sql_Cost);
-        ResultSet r_R=p_R.executeQuery();
-        ResultSet r_C=p_C.executeQuery();
-        while(r_R.next() && r_C.next()){
-            int revenue=r_R.getInt(2);
-            int expenses=r_C.getInt(2);
-            int profit=revenue-expenses;
-            ModelChart data=new ModelChart("Tháng "+r_R.getInt(1), new double[]{revenue,expenses,profit});
+        ResultSet r_R = p_R.executeQuery();
+        ResultSet r_C = p_C.executeQuery();
+        while (r_R.next() && r_C.next()) {
+            int revenue = r_R.getInt(2);
+            int expenses = r_C.getInt(2);
+            int profit = revenue - expenses;
+            ModelChart data = new ModelChart("Tháng " + r_R.getInt(1), new double[]{revenue, expenses, profit});
             list.add(data);
         }
         return list;
     }
+
     //Lấy toàn bộ danh sách Món ăn theo loại Món Ăn
     public ArrayList<ModelMonAn> getMenuFood() throws SQLException {
         ArrayList<ModelMonAn> list = new ArrayList<>();
@@ -291,12 +319,12 @@ public class ServiceAdmin {
             String name = r.getString("TenMon");
             int value = r.getInt("DonGia");
             String type = r.getString("Loai");
-            String state =r.getString("TrangThai");
+            String state = r.getString("TrangThai");
             ModelMonAn data;
             if (id < 90) {
-                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/" + type + "/" + id + ".jpg")), id, name, value, type,state);
+                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/" + type + "/" + id + ".jpg")), id, name, value, type, state);
             } else {
-                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/Unknown/unknown.jpg")), id, name, value, type,state);
+                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/Unknown/unknown.jpg")), id, name, value, type, state);
             }
             list.add(data);
         }
@@ -304,14 +332,15 @@ public class ServiceAdmin {
         p.close();
         return list;
     }
+
     //Lấy số lượng món ăn đang kinh doanh
-    public int getNumberFood_inBusiness() throws SQLException{
-        int number=0;
+    public int getNumberFood_inBusiness() throws SQLException {
+        int number = 0;
         String sql = "SELECT COUNT(*) FROM MonAn WHERE TrangThai = 'Dang kinh doanh'";
-        PreparedStatement p=con.prepareStatement(sql);
-        ResultSet r=p.executeQuery();
-        if(r.next()){
-            number=r.getInt(1);
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            number = r.getInt(1);
         }
         return number;
     }
@@ -340,6 +369,7 @@ public class ServiceAdmin {
         p.execute();
         p.close();
     }
+
     //Ngưng kinh doanh một món ăn (Cập nhật TrangThai='Ngung kinh doanh')
     public void StopSell(int idMA) throws SQLException {
         String sql = "UPDATE MonAn SET TrangThai = 'Ngung kinh doanh' WHERE ID_MonAn=?";
@@ -348,6 +378,7 @@ public class ServiceAdmin {
         p.execute();
         p.close();
     }
+
     //Kinh doanh trở lại một món ăn (Cập nhật TrangThai='Dang kinh doanh')
     public void BackSell(int idMA) throws SQLException {
         String sql = "UPDATE MonAn SET TrangThai = 'Dang kinh doanh' WHERE ID_MonAn=?";
@@ -356,6 +387,7 @@ public class ServiceAdmin {
         p.execute();
         p.close();
     }
+
     public int getNextID_MA() throws SQLException {
         int id = 0;
         String sql = "SELECT IFNULL(MIN(ID_MonAn) + 1, 1) FROM MonAn WHERE ID_MonAn + 1 NOT IN (SELECT ID_MonAn FROM MonAn)";
@@ -366,5 +398,57 @@ public class ServiceAdmin {
         }
         return id;
     }
+    //Lấy toàn bộ danh sách Khách Hàng
+    public ArrayList<ModelKhachHang> MenuKH() throws SQLException {
+        ArrayList<ModelKhachHang> list = new ArrayList<>();
+        String sql = "SELECT ID_KH, TenKH, DATE_FORMAT(Ngaythamgia, '%d-%m-%Y') AS Ngay, Doanhso, Diemtichluy FROM KhachHang";
 
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            int ID_KH = r.getInt(1);
+            String name = r.getString(2);
+            String dateJoin = r.getString(3);
+            int sales = r.getInt(4);
+            int points = r.getInt(5);
+            ModelKhachHang data = new ModelKhachHang(ID_KH, name, dateJoin, sales, points);
+            list.add(data);
+        }
+        r.close();
+        p.close();
+        return list;
+    }
+
+    //Lấy tên khách hàng từ Mã KH
+    public String getTenKH(int idKH) throws SQLException {
+        String name = "";
+        String sql = "SELECT TenKH From KhachHang WHERE ID_KH=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, idKH);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            name = r.getString(1);
+        }
+        p.close();
+        r.close();
+        return name;
+    }
+    
+    //Lấy tổng tiền nhập trong ngày hiện tại
+    public int getTongtienNK() throws SQLException {
+        int tongtien = 0;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
+        String sql = "SELECT SUM(Tongtien) FROM PhieuNK WHERE NgayNK = STR_TO_DATE(?, '%d-%m-%Y')";
+
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setString(1, simpleDateFormat.format(new Date()));
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            tongtien = r.getInt(1);
+        }
+        r.close();
+        p.close();
+        return tongtien;
+    }
+    
 }

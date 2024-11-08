@@ -152,6 +152,13 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    
+    
+    
+    
     private void register(){
         ModelNguoiDung user=loginAndRegister.getUser();
         try {
@@ -167,6 +174,11 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             
         }
     }
+    
+    
+    
+    
+    
     private void login(){
         ModelLogin data=loginAndRegister.getDataLogin();
         try {
@@ -175,13 +187,13 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                 this.dispose();
                 switch (user.getRole()) {
                     case "Khach Hang" -> {
-                        Main_Customer_Frame.main(user);
+                        //Main_Customer_Frame.main(user);
                     }
                     case "Nhan Vien Kho" -> {
-                        Main_WarehouseStaff_Frame.main(user);
+                        //Main_WarehouseStaff_Frame.main(user);
                     }
                     case "Nhan Vien" -> {
-                        Main_Staff_Frame.main(user);
+                        //Main_Staff_Frame.main(user);
                     }
                     case "Quan Ly" -> {
                         Main_Admin_Frame.main(user);
@@ -198,6 +210,11 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         }
     }
 
+    
+    
+    
+    
+    
     private void showMessage(Message.MessageType messageType,String message){
         Message ms=new Message();
         ms.showMessage(messageType, message);

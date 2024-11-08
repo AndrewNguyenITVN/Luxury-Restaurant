@@ -45,22 +45,7 @@ public class MS_Warning extends javax.swing.JDialog {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
     }
-    //Hiện cảnh báo khách hàng chưa đặt bàn
-    public void WarningBook() {
-        setLocationRelativeTo(frame);
-        lbTitle.setText("QUÝ KHÁCH CHƯA ĐẶT BÀN !!!");
-        lbMessage.setText("Quý khách vui lòng đặt bàn trước khi gọi món.");
-        animator.start();
-        setVisible(true);
-    }
-    //Hiện cảnh báo chưa đủ điểm tích lũy để đổi Voucher
-    public void WarningExchange(int need) {
-        setLocationRelativeTo(frame);
-        lbTitle.setText("QUÝ KHÁCH CHƯA ĐỦ XU !!!");
-        lbMessage.setText("Quý khách còn thiếu "+need+" xu để đổi Voucher này.");
-        animator.start();
-        setVisible(true);
-    }
+    
     //Thông báo nhập thiếu thông tin
     public void WarningLackofInfo() {
         setLocationRelativeTo(frame);

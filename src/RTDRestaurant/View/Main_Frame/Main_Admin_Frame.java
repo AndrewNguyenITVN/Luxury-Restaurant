@@ -5,7 +5,7 @@ import RTDRestaurant.Controller.Event.EventMenuSelected;
 import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Component.Admin_Component.MenuA;
 import RTDRestaurant.View.Form.MainForm;
-import RTDRestaurant.View.Form.Staff_Form.AccountS_Form;
+//import RTDRestaurant.View.Form.Staff_Form.AccountS_Form;
 import RTDRestaurant.View.Form.Staff_Form.Admin.BillStatistic_Form;
 import RTDRestaurant.View.Form.Staff_Form.Admin.ImportStatistic_Form;
 import RTDRestaurant.View.Form.Staff_Form.Admin.MenuManagement_Form;
@@ -69,7 +69,7 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
                         main.showForm(new CusInformation_Form(main));
                     }
                     case 9 -> {
-                        main.showForm(new AccountS_Form(user));
+                        //main.showForm(new AccountS_Form(user));
                     }
                     case 10 -> {
                         dispose();
