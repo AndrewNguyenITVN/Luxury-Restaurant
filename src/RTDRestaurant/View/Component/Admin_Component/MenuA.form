@@ -23,7 +23,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="sp" pref="0" max="32767" attributes="0"/>
-          <Component id="logo" alignment="0" pref="264" max="32767" attributes="0"/>
+          <Component id="logo" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -83,10 +83,10 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icons/businessman.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/Icons/logo_menu.png&quot;))" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Royal Administrator&lt;br&gt; Restaurant &#x2605;&#x2605;&#x2605;&#x2605;&#x2605;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Luxury Restaurant &lt;br&gt;Administrator &lt;br&gt;&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;&lt;/html&gt;"/>
         <Property name="iconTextGap" type="int" value="15"/>
       </Properties>
     </Component>

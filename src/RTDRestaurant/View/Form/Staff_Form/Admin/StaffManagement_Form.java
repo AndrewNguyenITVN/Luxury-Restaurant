@@ -161,7 +161,7 @@ public class StaffManagement_Form extends javax.swing.JPanel {
             tableNV.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
-        cmdAdd.setBackground(new java.awt.Color(108, 91, 123));
+        cmdAdd.setBackground(new java.awt.Color(158, 75, 75));
         cmdAdd.setForeground(new java.awt.Color(255, 255, 255));
         cmdAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
         cmdAdd.setText("THÊM NV");
@@ -169,7 +169,7 @@ public class StaffManagement_Form extends javax.swing.JPanel {
         cmdAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cmdAdd.setIconTextGap(15);
 
-        cmdUpdate.setBackground(new java.awt.Color(108, 91, 123));
+        cmdUpdate.setBackground(new java.awt.Color(158, 75, 75));
         cmdUpdate.setForeground(new java.awt.Color(255, 255, 255));
         cmdUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/change.png"))); // NOI18N
         cmdUpdate.setText("SỬA THÔNG TIN");

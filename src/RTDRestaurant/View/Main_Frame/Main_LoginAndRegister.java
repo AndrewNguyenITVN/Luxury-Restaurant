@@ -31,7 +31,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
     private PanelLoading loading;
     private PanelVerifyCode verifyCode;
     private boolean isLogin;
-    private final double addSize=30;
+    private final double addSize=45;
     private final double coverSize=40;
     private final double loginSize=60;
     private final DecimalFormat df= new DecimalFormat("##0.###");
@@ -39,8 +39,8 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
     public Main_LoginAndRegister() {
         initComponents();
         init();
-        setTitle("Royal TheDreamers Restaurant");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/restaurant (1).png")));
+        setTitle("Luxury Restaurant");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/logo_restaurant.png")));
     }
 
     private void init(){
@@ -63,32 +63,37 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         loading= new PanelLoading();
         verifyCode= new PanelVerifyCode();
         TimingTarget target = new TimingTargetAdapter(){
-            
+            private final double speedFactor = 1.0;  // hệ số mặc định là 1.0, điều chỉnh để tăng/giảm tốc độ
+
             @Override
             public void timingEvent(float fraction) {
                 double fractionCover;
                 double fractionLogin;
-                double size=coverSize;
-                if(fraction<=0.5f){
-                    size+=fraction*addSize;
-                }else{
-                    size+=addSize- fraction*addSize;
+                double size = coverSize;
+
+                if (fraction <= 0.5f) {
+                    size += fraction * addSize * speedFactor; // Áp dụng speedFactor để điều chỉnh tốc độ
+                } else {
+                    size += (addSize - fraction * addSize) * speedFactor; // Áp dụng speedFactor
                 }
-                if(isLogin){
-                    fractionCover=1-fraction;
-                    fractionLogin=fraction;
-                    if(fraction>=0.5f){
-                        cover.registerRight(fractionCover*100);
-                    }else{
-                        cover.loginRight(fractionLogin*100);
+
+                if (isLogin) {
+                    fractionCover = 1 - fraction;
+                    fractionLogin = fraction;
+
+                    if (fraction >= 0.5f) {
+                        cover.registerRight(fractionCover * 100 * speedFactor); // điều chỉnh theo speedFactor
+                    } else {
+                        cover.loginRight(fractionLogin * 100 * speedFactor); // điều chỉnh theo speedFactor
                     }
-                }else{
-                    fractionCover=fraction;
-                    fractionLogin=1-fraction;
-                    if(fraction<=0.5f){
-                        cover.registerLeft(fraction*100);
-                    }else{
-                        cover.loginLeft((1f-fraction)*100);
+                } else {
+                    fractionCover = fraction;
+                    fractionLogin = 1 - fraction;
+
+                    if (fraction <= 0.5f) {
+                        cover.registerLeft(fraction * 100 * speedFactor); // điều chỉnh theo speedFactor
+                    } else {
+                        cover.loginLeft((1f - fraction) * 100 * speedFactor); // điều chỉnh theo speedFactor
                     }
                 }
                 if(fraction>=0.5f){
@@ -109,10 +114,10 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             
         
         };
-        Animator animator = new Animator(800,target);
-        animator.setAcceleration(0.5f);
-        animator.setDeceleration(0.5f);
-        animator.setResolution(0); // for smooth animation
+        Animator animator = new Animator(700, target); // độ trễ duration
+        animator.setAcceleration(0.5f); // Tùy chỉnh tốc độ ở giai đoạn đầu (0.0 > 0.5)
+        animator.setDeceleration(0.5f); // Tùy chỉnh tốc độ ở giai đoạn kết thúc (0.0 > 0.5)
+        animator.setResolution(0); // Đảm bảo chuyển động mượt mà
         bg.setLayout(layout);
         bg.setLayer(loading, JLayeredPane.POPUP_LAYER);
         bg.add(loading,"pos 0 0 100% 100%");

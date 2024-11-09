@@ -14,7 +14,7 @@ import RTDRestaurant.View.Form.Staff_Form.Admin.StaffManagement_Form;
 import RTDRestaurant.View.Form.Staff_Form.CusInformation_Form;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-import java.sql.SQLException;
+//import java.sql.SQLException;
 import net.miginfocom.swing.MigLayout;
 
 public class Main_Admin_Frame extends javax.swing.JFrame {
@@ -27,16 +27,16 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
     public Main_Admin_Frame() throws HeadlessException {
         initComponents();
         init();
-        setTitle("Royal TheDreamers Restaurant");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/restaurant (1).png")));
+        setTitle("Luxury Restaurant");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/logo_restaurant.png")));
     }
 
     public Main_Admin_Frame(ModelNguoiDung user) {
         this.user = user;
         initComponents();
         init();
-        setTitle("Royal TheDreamers Restaurant");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/businessman.png")));
+        setTitle("Luxury Restaurant");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/logo_restaurant.png")));
     }
 
     public void init() {
@@ -69,7 +69,7 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
                         main.showForm(new CusInformation_Form(main));
                     }
                     case 9 -> {
-                        //main.showForm(new AccountS_Form(user));
+//                        main.showForm(new AccountS_Form(user));
                     }
                     case 10 -> {
                         dispose();
