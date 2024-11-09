@@ -2,40 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Swing/MenuItem.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/Admin/InsertAndUpdate_Food_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Model/ModelNhanVien.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceStaff.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Swing/MenuButton.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Component/Admin_Component/Card.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Swing/MyTextField.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceAdmin.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_Customer_Frame.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/WarehouseStaff/Import_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_Admin_Frame.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceUser.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/AccountS_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/Admin/InsertAndUpdate_Staff_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_Staff_Frame.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_LoginAndRegister.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceCustomer.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Swing/MenuAnimation.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/WarehouseStaff/InsertPNK_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceMail.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Connection/DatabaseConnection.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/WarehouseStaff/InsertAndUpdate_Ingredient_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/MainForm.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Swing/MyPasswordField.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_WarehouseStaff_Frame.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Component/LoginAndRegister_Component/PanelLoginAndRegister.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/WarehouseStaff/CTNK_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Dialog/MS_Admin_Confirm.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Customer_Form/TableMenu_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Swing/Button.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/DataBase/Database.sql</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/WarehouseStaff/Ingredient_Form.java</file>
-            <file>file:/D:/NetBeans/Project2/Java_Project_RestaurantMS/src/RTDRestaurant/Model/ModelNguoiDung.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
