@@ -119,12 +119,6 @@ public class PanelCover extends javax.swing.JPanel {
     public void registerLeft(double v){
         v=Double.parseDouble(df.format(v));
         login(false);
-//        layout.setComponentConstraints(logo, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(subtitle, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(description, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(description1, "pad 0 -"+v+"% 0 0");
-
         layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"% 0");
         layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"% 0");
         layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"% 0");
@@ -135,12 +129,6 @@ public class PanelCover extends javax.swing.JPanel {
     public void registerRight(double v){
         v=Double.parseDouble(df.format(v));
         login(false);
-//        layout.setComponentConstraints(logo, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(subtitle, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(description, "pad 0 -"+v+"% 0 0");
-//        layout.setComponentConstraints(description1, "pad 0 -"+v+"% 0 0");
-
         layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"% 0");
         layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"% 0");
         layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"% 0");
@@ -151,12 +139,6 @@ public class PanelCover extends javax.swing.JPanel {
     public void loginLeft(double v){
         v=Double.parseDouble(df.format(v));
         login(true);
-//        layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(description1, "pad 0 "+v+"% 0 "+v+"%");
-
         layout.setComponentConstraints(logo, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(subtitle, "pad 0 -"+v+"% 0 0");
@@ -167,12 +149,6 @@ public class PanelCover extends javax.swing.JPanel {
     public void loginRight(double v){
         v=Double.parseDouble(df.format(v));
         login(true);
-//        layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"%");
-//        layout.setComponentConstraints(description1, "pad 0 "+v+"% 0 "+v+"%");
-//
         layout.setComponentConstraints(logo, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(subtitle, "pad 0 -"+v+"% 0 0");

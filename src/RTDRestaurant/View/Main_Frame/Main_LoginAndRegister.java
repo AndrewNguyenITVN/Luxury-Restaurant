@@ -114,7 +114,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
 
 
         };
-        Animator animator = new Animator(700, target); // độ trễ duration
+        Animator animator = new Animator(500, target); // độ trễ duration
         animator.setAcceleration(0.5f); // Tùy chỉnh tốc độ ở giai đoạn đầu (0.0 > 0.5)
         animator.setDeceleration(0.5f); // Tùy chỉnh tốc độ ở giai đoạn kết thúc (0.0 > 0.5)
         animator.setResolution(0); // Đảm bảo chuyển động mượt mà
@@ -144,7 +144,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                     String name=loginAndRegister.getName();
                     if(service.verifyCodeWithUser(user.getUserID(),verifyCode.getInputCode())){
                         service.doneVerify(user.getUserID(),name);
-                        showMessage(Message.MessageType.SUCCESS, "Đăng ký thành công");
+                        showMessage(Message.MessageType.SUCCESS, "Đăng ký thành công. Vui lòng đăng nhập");
                         verifyCode.setVisible(false);
                     }else{
                         showMessage(Message.MessageType.ERROR, "Mã xác minh không chính xác");

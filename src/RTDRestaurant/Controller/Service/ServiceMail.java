@@ -42,9 +42,9 @@ public class ServiceMail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-            message.setSubject("Verify Code");
+            message.setSubject("Luxury Restaurant Verify Code");
             message.setText(code + " là mã xác minh tài khoản"
-                            + " Royal TheDreamers Restaurant của bạn.");
+                            + " Luxury Restaurant của bạn.");
             Transport.send(message);
             ms.setSuccess(true);
         } catch (MessagingException e) {
