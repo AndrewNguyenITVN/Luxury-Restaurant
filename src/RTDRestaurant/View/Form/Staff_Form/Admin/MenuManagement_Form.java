@@ -167,19 +167,24 @@ public class MenuManagement_Form extends javax.swing.JPanel {
             tableMA.getColumnModel().getColumn(3).setMaxWidth(120);
         }
 
-        cmdAdd.setBackground(new java.awt.Color(108, 91, 123));
+        cmdAdd.setBackground(new java.awt.Color(158, 75, 75));
         cmdAdd.setForeground(new java.awt.Color(255, 255, 255));
         cmdAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/online-order.png"))); // NOI18N
         cmdAdd.setText("THÊM MÓN ĂN");
         cmdAdd.setFocusable(false);
         cmdAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        cmdUpdate.setBackground(new java.awt.Color(108, 91, 123));
+        cmdUpdate.setBackground(new java.awt.Color(158, 75, 75));
         cmdUpdate.setForeground(new java.awt.Color(255, 255, 255));
         cmdUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/change.png"))); // NOI18N
         cmdUpdate.setText("SỬA THÔNG TIN");
         cmdUpdate.setFocusable(false);
         cmdUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cmdUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -235,6 +240,10 @@ public class MenuManagement_Form extends javax.swing.JPanel {
 
         searchTable(txtSearch.getText().trim());
     }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void cmdUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

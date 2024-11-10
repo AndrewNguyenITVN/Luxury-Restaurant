@@ -25,14 +25,14 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 
 public class Main_LoginAndRegister extends javax.swing.JFrame {
-    
+
     private MigLayout layout;
     private PanelCover cover;
     private PanelLoginAndRegister loginAndRegister;
     private PanelLoading loading;
     private PanelVerifyCode verifyCode;
     private boolean isLogin;
-    private final double addSize=30;
+    private final double addSize=45;
     private final double coverSize=40;
     private final double loginSize=60;
     private final DecimalFormat df= new DecimalFormat("##0.###");
@@ -40,8 +40,8 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
     public Main_LoginAndRegister() {
         initComponents();
         init();
-        setTitle("Royal TheDreamers Restaurant");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/restaurant (1).png")));
+        setTitle("Luxury Restaurant");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/logo_restaurant.png")));
     }
 
     private void init(){
@@ -51,50 +51,54 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         ActionListener eventRegister = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               register();
+                register();
             }
         };
         ActionListener eventLogin = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               login();
+                login();
             }
         };
         loginAndRegister = new PanelLoginAndRegister(eventRegister,eventLogin);
         loading= new PanelLoading();
         verifyCode= new PanelVerifyCode();
         TimingTarget target = new TimingTargetAdapter(){
-            
+            private final double speedFactor = 1.0;  // hệ số mặc định là 1.0, điều chỉnh để tăng/giảm tốc độ
             @Override
             public void timingEvent(float fraction) {
                 double fractionCover;
                 double fractionLogin;
-                double size=coverSize;
-                if(fraction<=0.5f){
-                    size+=fraction*addSize;
-                }else{
-                    size+=addSize- fraction*addSize;
+                double size = coverSize;
+
+                if (fraction <= 0.5f) {
+                    size += fraction * addSize * speedFactor; // Áp dụng speedFactor để điều chỉnh tốc độ
+                } else {
+                    size += (addSize - fraction * addSize) * speedFactor; // Áp dụng speedFactor
                 }
-                if(isLogin){
-                    fractionCover=1-fraction;
-                    fractionLogin=fraction;
-                    if(fraction>=0.5f){
-                        cover.registerRight(fractionCover*100);
-                    }else{
-                        cover.loginRight(fractionLogin*100);
+
+                if (isLogin) {
+                    fractionCover = 1 - fraction;
+                    fractionLogin = fraction;
+
+                    if (fraction >= 0.5f) {
+                        cover.registerRight(fractionCover * 100 * speedFactor); // điều chỉnh theo speedFactor
+                    } else {
+                        cover.loginRight(fractionLogin * 100 * speedFactor); // điều chỉnh theo speedFactor
                     }
-                }else{
-                    fractionCover=fraction;
-                    fractionLogin=1-fraction;
-                    if(fraction<=0.5f){
-                        cover.registerLeft(fraction*100);
-                    }else{
-                        cover.loginLeft((1f-fraction)*100);
+                } else {
+                    fractionCover = fraction;
+                    fractionLogin = 1 - fraction;
+
+                    if (fraction <= 0.5f) {
+                        cover.registerLeft(fraction * 100 * speedFactor); // điều chỉnh theo speedFactor
+                    } else {
+                        cover.loginLeft((1f - fraction) * 100 * speedFactor); // điều chỉnh theo speedFactor
                     }
                 }
                 if(fraction>=0.5f){
                     loginAndRegister.showRegister(isLogin);
-                    
+
                 }
                 fractionCover=Double.parseDouble(df.format(fractionCover));
                 fractionLogin=Double.parseDouble(df.format(fractionLogin));
@@ -102,18 +106,18 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                 layout.setComponentConstraints(loginAndRegister, "width "+loginSize+"%, pos "+fractionLogin+"al 0 n 100%");
                 bg.revalidate();
             }
-            
+
             @Override
             public void end() {
                 isLogin=!isLogin;
             }
-            
-        
+
+
         };
-        Animator animator = new Animator(800,target);
-        animator.setAcceleration(0.5f);
-        animator.setDeceleration(0.5f);
-        animator.setResolution(0); // for smooth animation
+        Animator animator = new Animator(500, target); // độ trễ duration
+        animator.setAcceleration(0.5f); // Tùy chỉnh tốc độ ở giai đoạn đầu (0.0 > 0.5)
+        animator.setDeceleration(0.5f); // Tùy chỉnh tốc độ ở giai đoạn kết thúc (0.0 > 0.5)
+        animator.setResolution(0); // Đảm bảo chuyển động mượt mà
         bg.setLayout(layout);
         bg.setLayer(loading, JLayeredPane.POPUP_LAYER);
         bg.add(loading,"pos 0 0 100% 100%");
@@ -127,25 +131,25 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                 if(!animator.isRunning()){
                     animator.start();
                 }else{
-                    
+
                 }
             }
         });
         verifyCode.addEventButtonOK(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+
                 try {
                     ModelNguoiDung user = loginAndRegister.getUser();
                     String name=loginAndRegister.getName();
                     if(service.verifyCodeWithUser(user.getUserID(),verifyCode.getInputCode())){
                         service.doneVerify(user.getUserID(),name);
-                        showMessage(Message.MessageType.SUCCESS, "Đăng ký thành công");
+                        showMessage(Message.MessageType.SUCCESS, "Đăng ký thành công. Vui lòng đăng nhập");
                         verifyCode.setVisible(false);
                     }else{
                         showMessage(Message.MessageType.ERROR, "Mã xác minh không chính xác");
                     }
-                    
+
                 }catch (SQLException e) {
                     showMessage(Message.MessageType.ERROR, "Xảy ra lỗi hệ thống");
                     e.printStackTrace();
@@ -165,7 +169,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
             showMessage(Message.MessageType.ERROR, "Lỗi đăng ký");
-            
+
         }
     }
     private void login(){
@@ -176,13 +180,13 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                 this.dispose();
                 switch (user.getRole()) {
                     case "Khach Hang" -> {
-                        Main_Customer_Frame.main(user);
+                        //Main_Customer_Frame.main(user);
                     }
                     case "Nhan Vien Kho" -> {
-                        Main_WarehouseStaff_Frame.main(user);
+                        //Main_WarehouseStaff_Frame.main(user);
                     }
                     case "Nhan Vien" -> {
-                        Main_Staff_Frame.main(user);
+                        //Main_Staff_Frame.main(user);
                     }
                     case "Quan Ly" -> {
                         Main_Admin_Frame.main(user);
@@ -190,7 +194,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                     default -> {
                     }
                 }
-                
+
             }else{
                 showMessage(Message.MessageType.ERROR, "Email hoặc mật khẩu không chính xác");
             }
@@ -243,14 +247,14 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             @Override
             public void end() {
                 if(ms.isShow()){
-                   bg.remove(ms);
-                   bg.repaint();
-                   bg.revalidate();
+                    bg.remove(ms);
+                    bg.repaint();
+                    bg.revalidate();
                 }else{
                     ms.setShow(true);
                 }
             }
-            
+
         };
         Animator animator =new Animator(300, target);
         animator.setResolution(0);
@@ -269,9 +273,9 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         bg = new javax.swing.JLayeredPane();
@@ -284,35 +288,35 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 904, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 904, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 584, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
-  
+
     public static void main() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -334,8 +338,12 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+
         /* Create and display the form */
+
         DatabaseConnection.getInstance().connectToDatabase();
+
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_LoginAndRegister().setVisible(true);
@@ -346,7 +354,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -368,8 +376,11 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+
         /* Create and display the form */
+
         DatabaseConnection.getInstance().connectToDatabase();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_LoginAndRegister().setVisible(true);
@@ -377,7 +388,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify
     private javax.swing.JLayeredPane bg;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration
 }

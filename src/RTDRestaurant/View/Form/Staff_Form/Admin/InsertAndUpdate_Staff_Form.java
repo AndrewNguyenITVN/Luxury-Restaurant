@@ -128,7 +128,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/karina1.jpg"))); // NOI18N
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/import_staff.png"))); // NOI18N
 
         lbmaNV.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lbmaNV.setForeground(new java.awt.Color(89, 89, 89));
@@ -183,6 +183,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         cmdOK.setText("Xác nhận");
         cmdOK.setFocusable(false);
         cmdOK.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        cmdOK.setMargin(new java.awt.Insets(3, 14, 3, 14));
         cmdOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdOKActionPerformed(evt);
@@ -232,7 +233,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         txtmaNQL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtmaNQL.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
 
-        cmdKick.setBackground(new java.awt.Color(108, 91, 123));
+        cmdKick.setBackground(new java.awt.Color(158, 75, 75));
         cmdKick.setForeground(new java.awt.Color(255, 255, 255));
         cmdKick.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/job.png"))); // NOI18N
         cmdKick.setText("SA THẢI");
@@ -288,7 +289,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(231, 231, 231)
                 .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148)
+                .addGap(142, 142, 142)
                 .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -336,11 +337,11 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
                         .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -348,14 +349,13 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

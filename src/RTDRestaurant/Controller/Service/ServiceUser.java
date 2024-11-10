@@ -31,7 +31,8 @@ public class ServiceUser {
     */
     public ModelNguoiDung login(ModelLogin login) throws SQLException{
         ModelNguoiDung user=null;
-        String sql = "SELECT * FROM NguoiDung WHERE Email=? AND Matkhau=? AND Trangthai='Verified' FETCH FIRST 1 ROWS ONLY";
+        String sql = "SELECT * FROM NguoiDung WHERE Email=? AND Matkhau=? AND Trangthai='Verified' LIMIT 1";
+
         PreparedStatement p=con.prepareStatement(sql);
         p.setString(1, login.getEmail());
         p.setString(2, login.getPassword());
@@ -54,13 +55,15 @@ public class ServiceUser {
     */
     public void insertUser(ModelNguoiDung user)throws SQLException{
         //Lấy ID của User tiếp theo 
-        PreparedStatement p1=con.prepareStatement("SELECT MAX(ID_ND) as ID_ND FROM NguoiDung");
+        PreparedStatement p1 = con.prepareStatement("SELECT MAX(ID_ND) as ID_ND FROM NguoiDung");
+
         ResultSet r= p1.executeQuery();
         r.next();
         int userID=r.getInt("ID_ND")+1;
         
         //Thêm Người Dùng
-        String sql_ND = "INSERT INTO NguoiDung (ID_ND,Email, MatKhau, VerifyCode,Vaitro) VALUES (?,?, ?, ?,'Khach Hang')";
+        String sql_ND = "INSERT INTO NguoiDung (ID_ND, Email, MatKhau, VerifyCode, Vaitro) VALUES (?, ?, ?, ?, 'Khach Hang')";
+
         PreparedStatement p=con.prepareStatement(sql_ND);
         String code=generateVerifiyCode();
         p.setInt(1, userID);
@@ -92,7 +95,8 @@ public class ServiceUser {
     //Kiểm tra Mã trùng 
     private boolean checkDuplicateCode(String code) throws SQLException{
         boolean duplicate=false;
-        String sql="SELECT * FROM NguoiDung WHERE VerifyCode=? FETCH FIRST 1 ROWS ONLY";
+        String sql = "SELECT * FROM NguoiDung WHERE VerifyCode=? LIMIT 1";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, code);
         ResultSet r=p.executeQuery();
@@ -111,7 +115,8 @@ public class ServiceUser {
     */
     public boolean checkDuplicateEmail(String email) throws SQLException{
         boolean duplicate=false;
-        String sql="SELECT * FROM NguoiDung WHERE Email=? AND Trangthai='Verified' FETCH FIRST 1 ROWS ONLY";
+        String sql = "SELECT * FROM NguoiDung WHERE Email=? AND Trangthai='Verified' LIMIT 1";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, email);
         ResultSet r=p.executeQuery();
@@ -149,7 +154,8 @@ public class ServiceUser {
         
         //Thêm KH mới
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String sql_KH="INSERT INTO KhachHang (ID_KH,TenKH, Ngaythamgia,ID_ND) VALUES (?,?,to_date(?, 'dd-mm-yyyy'),?)";
+        String sql_KH = "INSERT INTO KhachHang (ID_KH, TenKH, Ngaythamgia, ID_ND) VALUES (?, ?, STR_TO_DATE(?, '%d-%m-%Y'), ?)";
+
         PreparedStatement p2=con.prepareStatement(sql_KH);
         p2.setInt(1, id);
         p2.setString(2, name);
@@ -170,7 +176,8 @@ public class ServiceUser {
     */
     public boolean verifyCodeWithUser(int userID,String code) throws SQLException{
         boolean verify=false;
-        String sql="SELECT COUNT(ID_ND) as CountID FROM NguoiDung WHERE ID_ND=? AND VerifyCode=?";
+        String sql = "SELECT COUNT(ID_ND) AS CountID FROM NguoiDung WHERE ID_ND = ? AND VerifyCode = ?";
+
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, userID);
         p.setString(2,code);

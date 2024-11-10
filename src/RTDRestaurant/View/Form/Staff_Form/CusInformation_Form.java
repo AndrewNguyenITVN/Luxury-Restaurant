@@ -1,6 +1,6 @@
 package RTDRestaurant.View.Form.Staff_Form;
 
-import RTDRestaurant.Controller.Service.ServiceStaff;
+import RTDRestaurant.Controller.Service.ServiceAdmin;
 import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
@@ -15,14 +15,14 @@ import java.util.logging.Logger;
 
 public class CusInformation_Form extends javax.swing.JPanel {
 
-    private ServiceStaff service;
+    private ServiceAdmin service;
     private ArrayList<ModelKhachHang> list;
     private final MainForm main;
     private DecimalFormat df;
 
     public CusInformation_Form(MainForm main) {
         this.main = main;
-        service = new ServiceStaff();
+        service = new ServiceAdmin();
         initComponents();
         init();
     }

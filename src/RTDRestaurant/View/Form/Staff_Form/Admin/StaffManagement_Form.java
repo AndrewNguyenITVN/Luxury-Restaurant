@@ -1,7 +1,7 @@
 package RTDRestaurant.View.Form.Staff_Form.Admin;
 
 import RTDRestaurant.Controller.Service.ServiceAdmin;
-import RTDRestaurant.Controller.Service.ServiceStaff;
+//import RTDRestaurant.Controller.Service.ServiceStaff;
 import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.Model.ModelNhanVien;
 import RTDRestaurant.View.Form.MainForm;
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class StaffManagement_Form extends javax.swing.JPanel {
 
     private ServiceAdmin serviceA;
-    private ServiceStaff serviceS;
+    //private ServiceStaff serviceS;
     private ArrayList<ModelNhanVien> list;
     private ModelNguoiDung user;
     private ModelNhanVien admin;
@@ -27,7 +27,7 @@ public class StaffManagement_Form extends javax.swing.JPanel {
         this.user=user;
         this.main = main;
         serviceA = new ServiceAdmin();
-        serviceS = new ServiceStaff();
+        //serviceS = new ServiceStaff();
         initComponents();
         init();
     }
@@ -36,7 +36,6 @@ public class StaffManagement_Form extends javax.swing.JPanel {
         txtSearch.setHint("Tìm kiếm Nhân Viên . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getViewport().setBackground(Color.WHITE);
-        getInfoNQL();
         //Thêm data cho Menu
         initTable();
         getNumberofS();
@@ -62,13 +61,6 @@ public class StaffManagement_Form extends javax.swing.JPanel {
 
     }
 
-    public void getInfoNQL() {
-        try {
-            admin = serviceS.getStaff(user.getUserID());
-        } catch (SQLException ex) {
-            Logger.getLogger(StaffManagement_Form.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public void getNumberofS() {
         txtTong.setText(list.size() + " HR");
@@ -169,7 +161,7 @@ public class StaffManagement_Form extends javax.swing.JPanel {
             tableNV.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
-        cmdAdd.setBackground(new java.awt.Color(108, 91, 123));
+        cmdAdd.setBackground(new java.awt.Color(158, 75, 75));
         cmdAdd.setForeground(new java.awt.Color(255, 255, 255));
         cmdAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
         cmdAdd.setText("THÊM NV");
@@ -177,7 +169,7 @@ public class StaffManagement_Form extends javax.swing.JPanel {
         cmdAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cmdAdd.setIconTextGap(15);
 
-        cmdUpdate.setBackground(new java.awt.Color(108, 91, 123));
+        cmdUpdate.setBackground(new java.awt.Color(158, 75, 75));
         cmdUpdate.setForeground(new java.awt.Color(255, 255, 255));
         cmdUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/change.png"))); // NOI18N
         cmdUpdate.setText("SỬA THÔNG TIN");

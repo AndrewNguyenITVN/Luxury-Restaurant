@@ -48,9 +48,9 @@ public class MenuA extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/inventory.png")), "Thống kê Nhập Kho"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/customer.png")), "Thông tin Khách Hàng"));
         addMenu(new ModelMenu(null, ""));
-        addMenu(new ModelMenu(null, "Thông tin cá nhân"));
+//        addMenu(new ModelMenu(null, "Thông tin cá nhân"));
         addMenu(new ModelMenu(null, ""));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/user.png")), "Tài Khoản"));
+//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/user.png")), "Tài Khoản"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/logout.png")), "Đăng Xuất"));
     }
 
@@ -112,8 +112,8 @@ public class MenuA extends javax.swing.JPanel {
         logo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         logo.setForeground(new java.awt.Color(255, 255, 255));
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/businessman.png"))); // NOI18N
-        logo.setText("<html>Royal Administrator<br> Restaurant ★★★★★</html>");
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo_menu.png")));
+        logo.setText("<html>Luxury Restaurant <br>Administrator <br>★★★★★</html>");
         logo.setIconTextGap(15);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -121,7 +121,7 @@ public class MenuA extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+            .addComponent(logo)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +137,7 @@ public class MenuA extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gp= new GradientPaint(0, 0, Color.decode("#928199"), 0, getHeight(), Color.decode("#847589"));
+        GradientPaint gp= new GradientPaint(0, 0, Color.decode("#d52d2a"), 0, getHeight(), Color.decode("#222220"));
         g2.setPaint(gp);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
         g2.fillRect(0, 0, getWidth(), getHeight());

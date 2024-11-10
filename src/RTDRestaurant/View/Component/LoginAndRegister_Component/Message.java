@@ -71,9 +71,9 @@ public class Message extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         Graphics2D g2= (Graphics2D)g;
         if(messageType==MessageType.SUCCESS){
-            g2.setColor(Color.decode("#11998e"));
+            g2.setColor(Color.decode("#72d473"));
         }else{
-            g2.setColor(Color.decode("#ED213A"));
+            g2.setColor(Color.decode("#c1182d"));
         }
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.9f));
         g2.fillRect(0, 0, getWidth(), getHeight());

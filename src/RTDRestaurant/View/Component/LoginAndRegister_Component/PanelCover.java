@@ -17,6 +17,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 //Panel Cover ở màn hình đăng nhập/đăng ký
 public class PanelCover extends javax.swing.JPanel {
 
@@ -30,6 +33,8 @@ public class PanelCover extends javax.swing.JPanel {
     private ButtonOutLine button;
     private boolean isLogin; // True nếu đang ở màn hình đăng nhập, ngược lại False
     private final DecimalFormat df= new DecimalFormat("##0.###");
+    private double position = 0;
+    private Timer timer;
     public PanelCover() {
         initComponents();
         setOpaque(false);
@@ -41,21 +46,23 @@ public class PanelCover extends javax.swing.JPanel {
     private void init(){
        
         logo= new ImageLogo();
-        logo.setPreferredSize(new Dimension(250,250));
+        logo.setPreferredSize(new Dimension(300,250));
         logo.setIcon(new ImageIcon(getClass().getResource("/Icons/logo_register.png")));
         add(logo);
         
-        title= new JLabel("Chào mừng bạn đến với nhà hàng");
+
+        
+        title= new JLabel("Chào mừng bạn đến");
         title.setFont(new Font("sansserif",1,18));
         title.setForeground(new Color(245,245,245));
         add(title);
         
-        subtitle= new JLabel("Royal TheDreamers");
+        subtitle= new JLabel("Luxury Restaurant");
         subtitle.setFont(new Font("sansserif",1,28));
         subtitle.setForeground(new Color(245,245,245));
         add(subtitle);
         
-        description = new JLabel("Để sử dụng dịch vụ tại đây vui lòng");
+        description = new JLabel("Nếu bạn đã có tài khoản vui lòng");
         description.setForeground(new Color(245,245,245));
         add(description);
         
@@ -98,25 +105,40 @@ public class PanelCover extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gp = new GradientPaint(0, 0, Color.decode("#C06C84"), 0, getHeight(), Color.decode("#6C5B7B"));
+        GradientPaint gp = new GradientPaint(0, 0, Color.decode("#d52d2a"), 0, getHeight(), Color.decode("#222220"));
         g2.setPaint(gp);
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(g);
     }
+
+    
+
+
+
     //Repaint Panel Cover khi thay đổi giữa màn hình Đăng nhập/Đăng ký
     public void registerLeft(double v){
         v=Double.parseDouble(df.format(v));
         login(false);
-        layout.setComponentConstraints(logo, "pad 0 -"+v+"% 0 0");
-        layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
-        layout.setComponentConstraints(subtitle, "pad 0 -"+v+"% 0 0");
-        layout.setComponentConstraints(description, "pad 0 -"+v+"% 0 0");
-        layout.setComponentConstraints(description1, "pad 0 -"+v+"% 0 0");
+        layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(description1, "pad 0 "+v+"% 0 "+v+"% 0");
     }
     //Repaint Panel Cover khi thay đổi giữa màn hình Đăng nhập/Đăng ký
     public void registerRight(double v){
         v=Double.parseDouble(df.format(v));
         login(false);
+        layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"% 0");
+        layout.setComponentConstraints(description1, "pad 0 "+v+"% 0 "+v+"% 0");
+    }
+     //Repaint Panel Cover khi thay đổi giữa màn hình Đăng nhập/Đăng ký
+    public void loginLeft(double v){
+        v=Double.parseDouble(df.format(v));
+        login(true);
         layout.setComponentConstraints(logo, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(subtitle, "pad 0 -"+v+"% 0 0");
@@ -124,24 +146,14 @@ public class PanelCover extends javax.swing.JPanel {
         layout.setComponentConstraints(description1, "pad 0 -"+v+"% 0 0");
     }
      //Repaint Panel Cover khi thay đổi giữa màn hình Đăng nhập/Đăng ký
-    public void loginLeft(double v){
-        v=Double.parseDouble(df.format(v));
-        login(true);
-        layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(description1, "pad 0 "+v+"% 0 "+v+"%");
-    }
-     //Repaint Panel Cover khi thay đổi giữa màn hình Đăng nhập/Đăng ký
     public void loginRight(double v){
         v=Double.parseDouble(df.format(v));
         login(true);
-        layout.setComponentConstraints(logo, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(subtitle, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"%");
-        layout.setComponentConstraints(description1, "pad 0 "+v+"% 0 "+v+"%");
+        layout.setComponentConstraints(logo, "pad 0 -"+v+"% 0 0");
+        layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
+        layout.setComponentConstraints(subtitle, "pad 0 -"+v+"% 0 0");
+        layout.setComponentConstraints(description, "pad 0 -"+v+"% 0 0");
+        layout.setComponentConstraints(description1, "pad 0 -"+v+"% 0 0");
     }
     private void login(boolean login){
         if(this.isLogin!=login){
@@ -149,14 +161,14 @@ public class PanelCover extends javax.swing.JPanel {
             if(login){
                 logo.setIcon(new ImageIcon(getClass().getResource("/Icons/logo_login.png")));
                 title.setText("Bạn chưa có tài khoản tại");
-                description.setText("Đừng lo, tạo mới một tài khoản");
-                description1.setText("và bắt đầu trải nghiệm của bạn với nhà hàng chúng tôi");
+                description.setText("Đừng lo, hãy tạo một tài khoản mới");
+                description1.setText("và bắt đầu trải nghiệm của bạn tại nhà hàng");
                 button.setText("Đăng ký  >>");
             }else{
                 //Set Data cho Panel cover khi ở màn hình đăng ký
                 logo.setIcon(new ImageIcon(getClass().getResource("/Icons/logo_register.png")));
-                title.setText("Chào mừng bạn đến với nhà hàng");
-                description.setText("Để sử dụng dịch vụ tại đây vui lòng");
+                title.setText("Chào mừng bạn đến");
+                description.setText("Nếu bạn đã có tài khoản vui lòng");
                 description1.setText("đăng nhập với tài khoản cá nhân của bạn");
                 button.setText("<<  Đăng nhập");
             }

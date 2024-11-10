@@ -22,10 +22,8 @@ public class ImageLogo extends JComponent {
         this.icon = icon;
     }
 
-
     private Icon icon;
-    
-    
+ 
     @Override
     protected void paintComponent(Graphics g) {
         //Draw Image
@@ -38,7 +36,7 @@ public class ImageLogo extends JComponent {
     
     //Fix kích thước ảnh
     private Rectangle getAutoSize(Icon image){
-        int w=250;
+        int w=300;
         int h=250;
         int iw=image.getIconWidth();
         int ih=image.getIconHeight();

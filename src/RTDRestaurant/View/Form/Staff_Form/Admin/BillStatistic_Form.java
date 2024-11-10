@@ -114,8 +114,6 @@ public class BillStatistic_Form extends javax.swing.JPanel {
         lbDate = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         filter = new javax.swing.JComboBox<>();
-        cmdCTHD = new RTDRestaurant.View.Swing.Button();
-        cmdExcel = new RTDRestaurant.View.Swing.Button();
 
         setBackground(new java.awt.Color(247, 247, 247));
 
@@ -198,30 +196,6 @@ public class BillStatistic_Form extends javax.swing.JPanel {
             }
         });
 
-        cmdCTHD.setBackground(new java.awt.Color(108, 91, 123));
-        cmdCTHD.setForeground(new java.awt.Color(255, 255, 255));
-        cmdCTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clipboard.png"))); // NOI18N
-        cmdCTHD.setText("XEM CTHĐ");
-        cmdCTHD.setFocusable(false);
-        cmdCTHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmdCTHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdCTHDActionPerformed(evt);
-            }
-        });
-
-        cmdExcel.setBackground(new java.awt.Color(108, 91, 123));
-        cmdExcel.setForeground(new java.awt.Color(255, 255, 255));
-        cmdExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/excel.png"))); // NOI18N
-        cmdExcel.setText("XUẤT FILE EXCEL");
-        cmdExcel.setFocusable(false);
-        cmdExcel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmdExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdExcelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,27 +206,24 @@ public class BillStatistic_Form extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbCus)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel1)
-                                .addGap(7, 7, 7)
-                                .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmdExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(cmdCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbprofit)
-                        .addGap(50, 50, 50)
-                        .addComponent(txtprofit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lbTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbCus)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(jLabel1)
+                                    .addGap(7, 7, 7)
+                                    .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbprofit)
+                                .addGap(50, 50, 50)
+                                .addComponent(txtprofit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -270,7 +241,7 @@ public class BillStatistic_Form extends javax.swing.JPanel {
                             .addComponent(txtprofit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(lbCus, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -278,10 +249,7 @@ public class BillStatistic_Form extends javax.swing.JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(filter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -296,53 +264,8 @@ public class BillStatistic_Form extends javax.swing.JPanel {
         FilterTable(filter.getSelectedItem().toString());
     }//GEN-LAST:event_filterActionPerformed
 
-    private void cmdExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdExcelActionPerformed
-        //Xuất danh sách Hóa Đơn ra file Excel
-        try {
-            ExcelDocument workbook = new ExcelDocument(1);
-            workbook.easy_getSheetAt(0).setSheetName("Danh sách Hóa Đơn");
-            ExcelTable xlsTable = ((ExcelWorksheet) workbook.easy_getSheetAt(0)).easy_getExcelTable();
-            //Them data cho header
-            DefaultTableModel model = (DefaultTableModel) tableHD.getModel();
-            for (int col = 0; col < model.getColumnCount(); col++) {
-                xlsTable.easy_getCell(0, col).setValue(model.getColumnName(col));
-                xlsTable.easy_getCell(0, col).setDataType(DataType.STRING);
-                xlsTable.easy_getCell(0, col).setBold(true);
-            }
-            //Thêm data cho bảng
-            for (int row = 0; row < model.getRowCount(); row++) {
-                for (int col = 0; col < model.getColumnCount(); col++) {
-                    xlsTable.easy_getCell(row+1, col).setValue(model.getValueAt(row, col)+"");
-                    xlsTable.easy_getCell(row+1, col).setDataType(DataType.STRING);
-                }
-            }
-            workbook.easy_WriteXLSXFile(".\\src\\ExportFile_Excel\\DanhsachHoaDon_" + simpleDateFormat.format(new Date()) + ".xlsx");
-            File file=new File("src\\ExportFile_Excel\\DanhsachHoaDon_" + simpleDateFormat.format(new Date()) + ".xlsx");
-            String path=file.getAbsolutePath();
-            System.out.println(path);
-            obj.ExportFileSuccess(path);
-            workbook.Dispose();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_cmdExcelActionPerformed
-
-    private void cmdCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCTHDActionPerformed
-        int idHD=tableHD.getFirstCol_RowSelected(tableHD.getSelectedRow());
-        ModelHoaDon bill=null;
-        for(ModelHoaDon data:list){
-            if(data.getIdHoaDon()==idHD){
-                bill=data;
-                break;
-            }
-        }
-        main.showForm(new CTHD_Form(bill,main));
-    }//GEN-LAST:event_cmdCTHDActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RTDRestaurant.View.Swing.Button cmdCTHD;
-    private RTDRestaurant.View.Swing.Button cmdExcel;
     private javax.swing.JComboBox<String> filter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
