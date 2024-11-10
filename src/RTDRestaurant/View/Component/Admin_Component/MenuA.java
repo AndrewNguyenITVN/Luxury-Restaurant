@@ -112,7 +112,7 @@ public class MenuA extends javax.swing.JPanel {
         logo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         logo.setForeground(new java.awt.Color(255, 255, 255));
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo_menu.png")));
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo_menu.png"))); // NOI18N
         logo.setText("<html>Luxury Restaurant <br>Administrator <br>★★★★★</html>");
         logo.setIconTextGap(15);
 
@@ -121,7 +121,7 @@ public class MenuA extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(logo)
+            .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
