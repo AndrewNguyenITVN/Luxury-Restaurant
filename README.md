@@ -75,7 +75,7 @@ Xây dựng hệ thống Quản lý Nhà Hàng một cách chuyên nghi�
 > * Sử dụng `mysql-connector-java-8.0`
 
 ## Hướng dẫn cài đặt chương trình
-> * **Bước 1:** Clone project [Java_Project_RestaurantMS](https://github.com/VietNguyen2003-UIT/Java_Project_RestaurantMS)
+> * **Bước 1:** Clone project [Java_Project](https://github.com/AndrewNguyenITVN/Luxury-Restaurant.git)
 > * **Bước 2:** Vào Netbeans chọn Open project và mở project vừa clone về.
 > * **Bước 3:** Thêm tất cả các thư viện cần thiết trong mục src/External_Library.
 > * **Bước 4:** Trong src/DataBase có file Database.sql. Tiến hành vào MySQL tạo user mới với Username là `root` và Password là `123`, sau đó chạy toàn bộ file Database.sql.
